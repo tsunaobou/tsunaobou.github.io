@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=default"></script>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tsuna's House</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../style.css" />
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="head">
+            <h1>Tsuna's House</h1>
+        </header>
+        <article class="post">
+            <h2>QCQC</h2>
+            大層な名前がついておりますが、そんなに大したコードではありません。
+            <br>要は「クリップボードにある文字列」から、指定した文字で始まるものを抜き出して<br>クリップボードに再貼付けするだけのスクリプトです。<br> 使用前にPythonをインストールし、
+            <pre class="prettyprint lang-sh">pip install pyperclip</pre>を実行しておいて下さい。
+            <pre class="prettyprint lang-py linenums">
+import pyperclip
+
+print("クリップボードから指定文字列を含むやつを抜き出すくん\n")
+outList = []
+query = input("指定する文字列を入力せよ>")
+urlList = pyperclip.paste().split()
+for url in urlList:
+    if url.startswith(query):
+        outList.append(url)
+pyperclip.copy("\n".join(outList))
+</pre>
+            <h3>活用法</h3>
+            私は気になった動画をYoutubeで次々と開いちゃうスタイルなので、タブが溜まりがちです。
+            <br>そんな時、上記のスクリプトを
+            <b>パスが通った</b>フォルダにqcqc.pyとして保存した後、 <pre class="prettyprint lang-sh">python qcqc.py</pre>としたqcqc.batを同じフォルダに作成。
+            <br><a href="https://chromewebstore.google.com/detail/copy-all-urls/djdmadneanknadilpjiknlnanaolmbfk">Copy All Urls</a>でブラウザのタブのURL一覧を取得したら、Windowsボタン→qcqc として実行。
+            <br>後は指示に従えばYoutube動画のURLだけがクリップボードにコピーされますので、
+            <br>テキストファイルにでも貼り付けて置いてください。<br>
+            <br>ちなみに、これでリスト化した動画たちの未だほとんどを私は見れていません。(オチ)
+        </article>
+        <footer id="foot">
+            <a href="../index.html">ホームへ</a>
+        </footer>
+    </div>
+</body>
+
+</html>
