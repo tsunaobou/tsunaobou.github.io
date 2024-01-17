@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=default"></script>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tsuna's House</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../style.css" />
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="head">
+            <h1>Tsuna's House</h1>
+        </header>
+        <article class="post">
+            <h2>List2Text</h2>
+            ブラウザの開発者ツールで動く、ブラウザ上から取得してきた諸々が入ったリストをテキストファイルに書き出せるやつです。
+            <br>
+            <pre class="prettyprint lang-js linenums">
+const blob = new Blob(downList, { type: 'text/plain' });
+const aTag = document.createElement('a');
+aTag.href = URL.createObjectURL(blob);
+aTag.target = '_blank';
+aTag.download = "down.txt";
+aTag.click();
+URL.revokeObjectURL(aTag.href);
+</pre>
+            <h3>活用法</h3>
+            getElementsByIDやgetAttributeなどのメソッドを使い取得したURL一覧をリストにまとめ、<br> それをテキストファイルに書き出す際に使えます。 例えばこんなふうに。
+            <pre class="prettyprint lang-js linenums">
+<xmp>
+pList=document.querySelectorAll("content")
+downList = [];
+for(i=0;i<pList.length;i++){
+    downList.push(pList[i].getAttribute("data")+"\n");
+}
+const blob = new Blob(downList, { type: 'text/plain' });
+const aTag = document.createElement('a');
+aTag.href = URL.createObjectURL(blob);
+aTag.target = '_blank';
+aTag.download = "down.txt";
+aTag.click();
+URL.revokeObjectURL(aTag.href);</xmp>
+            </pre>できたファイルは煮るなり焼くなり使えます。
+        </article>
+        <footer id="foot">
+            <a href="../index.html">ホームへ</a>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=default"></script>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tsuna's House</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../style.css" />
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="head">
+            <h1>Tsuna's House</h1>
+        </header>
+        <article class="post">
+            <h2>GetNicoMyList</h2>
+            ニコニコ動画のマイリストをブラウザから取得できるスクリプトです。 <br>ブラウザの開発者コンソールから実行します。
+            <br>
+            <pre class="prettyprint lang-js linenums">
+totalLists = []
+vLinkList = document.getElementsByClassName("VideoMediaObjectList")[0].getElementsByClassName("NC-Link NC-MediaObject-contents")
+for (i = 0; i < vLinkList.length; i++) {
+    totalLists.push([vLinkList[i].href, vLinkList[i].getElementsByClassName(
+    "NC-MediaObjectTitle NC-VideoMediaObject-title NC-MediaObjectTitle_fixed2Line")[0].innerText + "\n"])
+}
+const blob = new Blob(totalLists, { type: 'text/plain' });
+const aTag = document.createElement('a');
+aTag.href = URL.createObjectURL(blob);
+aTag.target = '_blank';
+aTag.download = "down.txt";
+aTag.click();
+URL.revokeObjectURL(aTag.href);
+</pre>
+            <h3>活用法</h3>
+            今のところ「後で見る」と「マイリスト」に対応してます。 仕様変更で使えなくなったら分かり次第更新します。
+        </article>
+        <footer id="foot">
+            <a href="../index.html">ホームへ</a>
+        </footer>
+    </div>
+</body>
+
+</html>

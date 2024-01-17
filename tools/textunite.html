@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&skin=default"></script>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tsuna's House</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../style.css" />
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="head">
+            <h1>Tsuna's House</h1>
+        </header>
+        <article class="post">
+            <h2>TextUnite</h2>
+            同じフォルダのテキストファイルの中身を全て統合し重複を排除し、一つのテキストファイルにまとめてくれるやつです。
+            <br> <pre class="prettyprint lang-py linenums">
+import glob
+
+textFileList = glob.glob('*.txt')
+
+tempList = []
+
+for file in textFileList:
+    with open(file, "r", encoding='utf-8_sig') as f:
+        for s in f.readlines():
+            tempList.append(s.rstrip())
+
+with open("out.txt", "w", encoding='utf-8_sig') as f:
+    f.write('\n'.join(list(set(tempList))))
+            </pre>
+            <h3>活用法</h3>
+            テキストファイルにURLなどをメモったものが大量にデスクトップやフォルダを占拠しているときなどにお使い下さい。<br> 重複を排除してくれるのは地味に楽です。 <br>念のために元ファイル削除機能はつけていませんが簡単にカスタマイズできると思います。
+        </article>
+        <footer id="foot">
+            <a href="../index.html">ホームへ</a>
+        </footer>
+    </div>
+</body>
+
+</html>
